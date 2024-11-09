@@ -15,7 +15,7 @@ const buyTicket = async (ticket) => {
             from: account,
             value: ticket.price,
         });
-        await refreshtickets(); // Refresh ticket list after purchase
+        await refreshtickets(); 
     } catch (error) {
         console.error("Error purchasing ticket:", error);
     }
@@ -28,18 +28,18 @@ let web3;
 if (window.ethereum) {
     web3 = new Web3(window.ethereum);
 } else {
-    web3 = new Web3('http://127.0.0.1:7545'); // Fallback to Ganache if MetaMask isn't available
+    web3 = new Web3('http://127.0.0.1:7545'); 
 }
 
 const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
 let account;
-const accountEl = document.getElementById('accounts'); // Changed from 'account' to 'accounts'
+const accountEl = document.getElementById('accounts'); 
 const ticketsEl = document.getElementById('tickets');
 
 const TOTAL_TICKETS = 10;
 
 const refreshtickets = async () => {
-    if (ticketsEl) ticketsEl.innerHTML = ""; // Clear existing tickets
+    if (ticketsEl) ticketsEl.innerHTML = ""; 
 
     for (let i = 0; i < TOTAL_TICKETS; i++) {
         try {
@@ -81,7 +81,7 @@ const main = async () => {
             await window.ethereum.request({ method: 'eth_requestAccounts' });
             const accounts = await web3.eth.getAccounts();
             account = accounts[0];
-            if (accountEl) accountEl.innerText = `Connected: ${account}`; // Display the account address
+            if (accountEl) accountEl.innerText = `Connected: ${account}`; 
             await refreshtickets();
         } else {
             console.error("MetaMask is not installed. Please install it to continue.");

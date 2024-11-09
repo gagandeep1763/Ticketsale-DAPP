@@ -35,6 +35,6 @@ contract Tickets {
 
     function getTicket(uint256 ticketId) public view returns (uint256, uint256, address, bool) {
         Ticket memory ticket = tickets[ticketId];
-        return (ticket.id, ticket.price, ticket.owner, ticket.purchased); // Return all relevant ticket data
+        return (ticket.id, ticket.price, ticket.owner, ticket.purchased); 
     }
 }

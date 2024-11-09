@@ -10,30 +10,27 @@ contract Tickets {
         uint256 id;
         uint256 price;
         address owner; 
-        bool purchased; // New field to track if the ticket is purchased
+        bool purchased; 
     }
 
     Ticket[TOTAL_TICKETS] public tickets;
 
     constructor() {
-        owner = msg.sender; // Set the contract deployer as the owner
+        owner = msg.sender; 
         for (uint256 i = 0; i < TOTAL_TICKETS; i++) {
             tickets[i].id = i;
-            tickets[i].price = 1 ether / 10; // Set the ticket price (0.1 ETH)
-            tickets[i].owner = address(0); // Initialize owner to zero address
-            tickets[i].purchased = false; // Initialize purchased status
+            tickets[i].price = 1 ether / 10;
+            tickets[i].owner = address(0);
+            tickets[i].purchased = false;
         }
     }
 
     function buyTicket(uint256 ticketId) public payable {
         require(msg.value == tickets[ticketId].price, "Incorrect Ether sent");
         require(tickets[ticketId].owner == address(0), "Ticket already sold");
-
-        // Mark the ticket as purchased and set the owner
         tickets[ticketId].owner = msg.sender;
-        tickets[ticketId].purchased = true; // Update purchased status
+        tickets[ticketId].purchased = true; 
 
-        // Optionally, you could add logic to transfer Ether to the contract owner
     }
 
     function getTicket(uint256 ticketId) public view returns (uint256, uint256, address, bool) {
